@@ -19,6 +19,8 @@ El servidor se basa en la biblioteca estándar de Python. [Su documentación ofi
 
 `python -B scripts/check_public.py` detecta patrones de credenciales, correos, rutas personales, URL de publicación y tipos de archivo privados. Informa solo el nombre del archivo y la categoría, nunca el posible valor secreto. Omite `.git` y carpetas generadas: no analiza historial ni acredita que todas las credenciales posibles sean detectables.
 
+La captura de ejemplo del README se revisó visualmente y contiene solo la aplicación con tickers genéricos. El escáner admite únicamente ese archivo con su huella SHA-256 revisada; si la imagen cambia o se añade otro archivo binario, exige una nueva revisión. No analiza automáticamente el texto ni los píxeles de las imágenes.
+
 La entrega se revisó por lista de archivos y con este escáner, pero ninguna revisión garantiza seguridad absoluta. Mantén Python y el navegador actualizados; revisa cambios y dependencias futuras. La ejecución directa no instala librerías de terceros.
 
 Crea un repositorio **nuevo** con esta carpeta: no copies `.git`, configuraciones de publicación ni archivos privados del proyecto original. Si detectas un secreto ya publicado, revócalo; borrarlo del archivo más reciente no lo elimina del historial. No pegues credenciales en issues públicos.

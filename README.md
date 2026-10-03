@@ -2,6 +2,12 @@
 
 Una aplicación local para consultar activos y visualizar velas, Bollinger y RSI. Python obtiene y procesa los datos; HTML/CSS/JavaScript dibuja las gráficas en el navegador. No requiere una cuenta, claves de API, Node ni publicar un sitio.
 
+## Vista de ejemplo
+
+Captura real de la aplicación ejecutándose con `AAPL MSFT SPY BTC-USD`, velas diarias y un rango de seis meses. Se tomó el 3 de octubre de 2026; las cotizaciones y el historial disponible cambian con el tiempo. Son ejemplos genéricos, no una cartera ni recomendaciones de inversión.
+
+![Market Grid ejecutándose localmente: cuatro gráficos con velas diarias, Bollinger y RSI](docs/images/market-grid-example.jpg)
+
 ## Ejecutar
 
 Necesitas Python 3.11 o posterior, un navegador moderno e Internet para consultar los precios.

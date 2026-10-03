@@ -1,4 +1,5 @@
 """Bounded, offline pre-publication scan; never prints suspected secret values."""
+import hashlib
 import re
 import sys
 from pathlib import Path
@@ -15,6 +16,10 @@ PATTERNS = {
     "deployment URL": re.compile(r"https?://[^\s]+\.chatgpt\.site", re.I),
 }
 TEXT_SUFFIXES = {".py", ".js", ".mjs", ".html", ".css", ".svg", ".md", ".toml", ".json", ".yml", ".yaml", ".txt"}
+# Exact screenshots reviewed visually; other binaries still require review.
+REVIEWED_IMAGES = {
+    "docs/images/market-grid-example.jpg": "676ee52c82767ee5ee2c6c169b0ed051a4178ec9230e637ef7b7dee68a88ddb1",
+}
 
 
 def scan():
@@ -30,6 +35,10 @@ def scan():
         if not path.is_file():
             continue
         count += 1
+        if relative.as_posix() in REVIEWED_IMAGES:
+            if hashlib.sha256(path.read_bytes()).hexdigest() != REVIEWED_IMAGES[relative.as_posix()]:
+                findings.append((relative, "image changed since visual privacy review"))
+            continue
         if path.name.startswith((".env", ".dev.vars")) or path.suffix.lower() in {".pem", ".key", ".p12", ".pfx", ".log", ".sqlite", ".db", ".zip"}:
             findings.append((relative, "private or generated file"))
             continue
