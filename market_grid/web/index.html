@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gráficos de mercado con velas, Bollinger y RSI. Interfaz local con backend Python.">
+  <title>Market Grid</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main id="workspace">
+    <header class="toolbar">
+      <div class="toolbar-inner">
+        <div class="brand-row"><h1>▥ <span>Market Grid</span></h1><span id="status" role="status" aria-live="polite">Preparando gráficos…</span></div>
+        <form id="controls" class="controls">
+          <label class="symbols-field"><span class="sr-only">Símbolos separados por espacios o comas</span><input id="symbols" placeholder="AAPL MSFT SPY BTC-USD" autocomplete="off" spellcheck="false" autocapitalize="characters"></label>
+          <button id="load" type="submit" class="primary">Cargar gráficos</button>
+          <label class="select-label">Vela <select id="interval" aria-label="Intervalo de vela"></select></label>
+          <label class="select-label">Rango <select id="range" aria-label="Rango total"></select></label>
+          <button id="auto" type="button" aria-pressed="true">Auto · 5 min</button>
+          <button id="refresh" type="button">↻ Actualizar</button>
+        </form>
+        <progress id="progress" max="100" value="0" aria-label="Progreso de carga" hidden></progress>
+        <p id="notice" role="status" hidden></p>
+      </div>
+    </header>
+    <section class="workspace-body" aria-label="Cuadrícula de activos">
+      <div class="section-caption"><span>Bollinger SMA 30 · 2σ / RSI 14</span><span id="asset-count">YAHOO FINANCE</span></div>
+      <div id="grid" class="asset-grid"></div>
+    </section>
+  </main>
+  <dialog id="focused" aria-labelledby="focus-title">
+    <div class="focus-toolbar">
+      <button id="back" type="button">▦ Volver a múltiples gráficos</button>
+      <div class="focus-controls">
+        <label class="select-label">Vela <select id="focus-interval" aria-label="Intervalo de vela en vista ampliada"></select></label>
+        <label class="select-label">Rango <select id="focus-range" aria-label="Rango total en vista ampliada"></select></label>
+      </div>
+      <div class="focus-title"><h2 id="focus-title"></h2><span>Esc para volver</span></div>
+    </div>
+    <p id="focus-notice" role="status" hidden></p>
+    <div id="focus-card"></div>
+  </dialog>
+  <noscript>Activa JavaScript para utilizar los gráficos. El servidor Python debe seguir abierto.</noscript>
+</body>
+</html>
